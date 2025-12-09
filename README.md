@@ -1,4 +1,4 @@
-# xbgame_Sign_in
+<img width="643" height="305" alt="image" src="https://github.com/user-attachments/assets/7b4e65b0-59d3-4bd3-a33b-6c9f0e8ec9e2" /># xbgame_Sign_in
 小白游戏网自动签到脚本
 
 功能说明：
@@ -10,3 +10,6 @@
 
 打包：
   pyinstaller -F -w --name "自动签到助手" --add-data "qiandao_config.ini;." --add-data "screenshots;screenshots" --icon=ico.ico .\qiandao_GUI.py
+
+
+![Uploading 主页面.PNG…]()
