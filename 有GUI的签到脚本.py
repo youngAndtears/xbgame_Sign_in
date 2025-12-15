@@ -82,6 +82,7 @@ class SignInThread(QThread):
             "bookmark": (1385, 116),
             "game_subtag": (1446, 168),
             "game_link": (1131, 340),
+            "gg":(1159,242),
             "sign_tag": (1870, 713),
             "sign_btn": (1740, 302)
         }
@@ -147,7 +148,7 @@ class SignInThread(QThread):
             # 等待浏览器窗口加载
             pyautogui.sleep(3)
             # 再次点击确保窗口前置
-            pyautogui.click(self.coords["browser_icon"])
+            # pyautogui.click(self.coords["browser_icon"])
             return True
         return False
 
@@ -181,12 +182,18 @@ class SignInThread(QThread):
                 raise Exception("二次点击游戏子标签失败")
             if not self.click_with_retry(self.coords["game_link"], "游戏链接（二次）"):
                 raise Exception("二次点击游戏链接失败")
+            pyautogui.sleep(3)
+            if not self.click_with_retry(self.coords["gg"], "关闭公告按钮"):
+                raise Exception("公告按钮关闭失败")
+
 
             # 步骤4：等待页面加载（智能超时）
             self.log_signal.emit("⏳ 等待游戏页面加载（最大20秒）...")
             if not self.wait_for_pixel_color(self.coords["game_link"], None, 20):
                 raise Exception("游戏页面加载超时")
-
+            pyautogui.sleep(3)
+            if not self.click_with_retry(self.coords["gg"], "关闭公告按钮"):
+                raise Exception("公告按钮关闭失败")
             # 步骤5：点击签到标签
             self.log_signal.emit("📝 点击签到标签...")
             if not self.click_with_retry(self.coords["sign_tag"], "签到标签"):
